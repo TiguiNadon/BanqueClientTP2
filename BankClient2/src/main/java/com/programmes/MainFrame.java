@@ -96,8 +96,16 @@ public class MainFrame extends JFrame implements Runnable, Observateur {
             if (!client.isConnecte()) {
                 this.setTitle(TITRE);
                 this.panneauPrincipal.setVisible(false);
+                this.miConnecter.setEnabled(true);
+                this.miDeconnecter.setEnabled(false);
                 panneauPrincipal.cacherPanneauCompteClient();
                 panneauPrincipal.montrerPanneauConnexion();
+            }else{
+                this.setTitle(TITRE);
+                this.miConnecter.setEnabled(false);
+                this.miDeconnecter.setEnabled(true);
+                panneauPrincipal.setVisible(true);
+
             }
         }
     }
