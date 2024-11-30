@@ -1,6 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauConfigServeur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author Abdelmoumène Toudeft (Abdelmoumene.Toudeft@etsmtl.ca)
  * @version 1.0
  * @since 2024-11-01
@@ -30,7 +30,7 @@ public class EcouteurMenuPrincipal implements ActionListener {
         int res;
 
         if (source instanceof JMenuItem) {
-            action = ((JMenuItem)source).getActionCommand();
+            action = ((JMenuItem) source).getActionCommand();
             switch (action) {
                 case "CONNECTER":
                     if (!client.isConnecte()) {
@@ -45,25 +45,46 @@ public class EcouteurMenuPrincipal implements ActionListener {
                         break;
                     res = JOptionPane.showConfirmDialog(fenetre, "Vous allez vous déconnecter",
                             "Confirmation Déconnecter",
-                            JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-                    if (res == JOptionPane.OK_OPTION){
+                            JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (res == JOptionPane.OK_OPTION) {
                         client.deconnecter();
                     }
                     break;
                 case "CONFIGURER":
-                    //TODO : compléter (question 1.3)
+                    if (!client.isConnecte())
+                        break;
+
+                    PanneauConfigServeur panneauConfig = new PanneauConfigServeur(client.getAdrServeur(), client.getPortServeur());
+
+                    Icon icon = UIManager.getIcon("OptionPane.questionIcon");
+
+                    Object[] options = {"Ok", "Annuler"};
+                    int option = JOptionPane.showOptionDialog(fenetre, panneauConfig, "Configuration serveur",
+                            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon, options, options[0]);
+
+                    if (option == 0) {
+
+                        String adresse = panneauConfig.getAdresseServeur();
+                        String port = panneauConfig.getPortServeur();
+
+                        client.setAdrServeur(adresse);
+                        client.setPortServeur(Integer.parseInt(port));
+                        JOptionPane.showMessageDialog(fenetre, "Configuration mise à jour avec succès !");
+
+                    } else if (option == 1) {
+                        JOptionPane.showMessageDialog(fenetre, "Configuration annulée.");
+                    }
                     break;
                 case "QUITTER":
                     if (client.isConnecte()) {
                         res = JOptionPane.showConfirmDialog(fenetre, "Vous allez vous déconnecter",
                                 "Confirmation Quitter",
-                                JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-                        if (res == JOptionPane.OK_OPTION){
+                                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if (res == JOptionPane.OK_OPTION) {
                             client.deconnecter();
                             System.exit(0);
                         }
-                    }
-                    else
+                    } else
                         System.exit(0);
                     break;
             }
