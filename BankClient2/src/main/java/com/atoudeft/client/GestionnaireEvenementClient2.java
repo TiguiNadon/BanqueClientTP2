@@ -31,6 +31,8 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
         int i;
         String[] t;
         MainFrame fenetre;
+        JFrame frame = new JFrame();
+
 
         if (source instanceof Connexion) {
             //cnx = (Connexion) source;
@@ -77,13 +79,21 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         for (String s:t) {
                             panneauPrincipal.ajouterCompte(s.substring(0,s.indexOf("]")+1));
                         }
+
                     }
                     break;
                 /******************* SÉLECTION DE COMPTES *******************/
                 case "EPARGNE" :
-                    arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"EPARGNE "+arg);
-                    break;
+                    try{
+                        arg = evenement.getArgument();
+                        JOptionPane.showMessageDialog(panneauPrincipal, "EPARGNE " + arg);
+                        break;
+                    }
+                    catch(Exception e){
+                        e = new Exception();
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Erreur inattendue"+ e);
+                        break;
+                    }
                 case "SELECT" :
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
