@@ -49,6 +49,7 @@ public class GestionnaireEvenementClient implements GestionnaireEvenement {
                     System.out.println("\t\t" + membres.length + " connectés :");
                     for (String s : membres)
                         System.out.println("\t\t\t- " + s);
+
                     break;
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default: //Afficher le texte recu :

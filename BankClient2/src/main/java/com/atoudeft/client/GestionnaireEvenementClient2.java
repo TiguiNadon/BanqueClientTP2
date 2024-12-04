@@ -106,6 +106,19 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"TRANSFER " + arg);
                     break;
+                case "HIST":
+                    arg = evenement.getArgument();
+                    JTextArea textArea = new JTextArea(10, 30);
+                    textArea.setText(arg);
+                    textArea.setEditable(false); // Lecture seule
+                    textArea.setLineWrap(true);  // Retour automatique à la ligne
+                    textArea.setWrapStyleWord(true); // Retour à la ligne par mot complet
+
+                    // Encapsulation dans un JScrollPane (pour gérer le défilement si nécessaire)
+                    JScrollPane scrollPane = new JScrollPane(textArea);
+
+                    // Affichage dans une boîte de dialogue de type message
+                    JOptionPane.showMessageDialog(null, scrollPane, "Boîte de Dialogue", JOptionPane.INFORMATION_MESSAGE);
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default:
                     System.out.println("RECU : "+evenement.getType()+" "+evenement.getArgument());
