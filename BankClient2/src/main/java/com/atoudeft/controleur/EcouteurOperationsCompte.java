@@ -1,6 +1,8 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauConnexion;
+import com.atoudeft.vue.PanneauOperationsCompte;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,11 +10,13 @@ import java.awt.event.ActionListener;
 
 public class EcouteurOperationsCompte implements ActionListener {
     private Client client;
+    private PanneauConnexion panneauConnexion;
 
     public EcouteurOperationsCompte(Client client) {
         this.client = client;
     }
 
+    //Lucas et Guillaume
     @Override
     public void actionPerformed(ActionEvent e) {
         //à compléter :
@@ -24,7 +28,9 @@ public class EcouteurOperationsCompte implements ActionListener {
             action = ((JMenuItem)source).getActionCommand();
 
             switch(action){
-
+                case "Connect":
+                    client.envoyer("Connect"+panneauConnexion.getNumeroCompteClient()+":"+panneauConnexion.getNip());
+                    break;
             }
         }
     }

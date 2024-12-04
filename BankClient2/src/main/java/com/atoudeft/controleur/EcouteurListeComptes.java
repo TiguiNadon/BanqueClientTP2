@@ -22,5 +22,6 @@ public class EcouteurListeComptes extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent evt) {
         //à compléter
+
     }
 }

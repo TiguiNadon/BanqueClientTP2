@@ -91,6 +91,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     }
                     catch(Exception e){
                         e = new Exception();
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Erreur inattendue"+ e);
                         break;
                     }
                 case "SELECT" :
