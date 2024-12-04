@@ -31,6 +31,14 @@ public class EcouteurOperationsCompte implements ActionListener {
                 case "Connect":
                     client.envoyer("Connect"+panneauConnexion.getNumeroCompteClient()+":"+panneauConnexion.getNip());
                     break;
+                case "Depot":
+                    break;
+                case "Retrait":
+                    break;
+                case "Facture":
+                    break;
+                case "Transfert":
+                    break;
             }
         }
     }
