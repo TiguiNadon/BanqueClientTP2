@@ -15,7 +15,7 @@ public class PanneauOperationsCompte extends JPanel {
         bTransfert = new JButton("Transferer");
         bFacture = new JButton("Payer Facture");
         bHistorique = new JButton("Historique du compte");
-        lblSolde = new JLabel("Solde : ");
+//        lblSolde = new JLabel("Solde : ");
 
         bEpargne.setActionCommand("DEPOT");
         bDepot.setActionCommand("DEPOT");
@@ -26,7 +26,7 @@ public class PanneauOperationsCompte extends JPanel {
 
         //à compléter :
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        this.add(lblSolde);
+        //this.add(lblSolde);
         this.add(bEpargne);
         this.add(bDepot);
         this.add(bRetrait);

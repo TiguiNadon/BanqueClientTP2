@@ -94,10 +94,17 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(panneauPrincipal,"Erreur inattendue"+ e);
                         break;
                     }
-                case "SELECT" :
+                case "SELECT":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
+                    String[] parts = arg.split(" ");
+                    if (parts.length >= 2) {
+                        String solde = parts[parts.length - 1];
+                        JOptionPane.showMessageDialog(null, "Le solde du compte est : "
+                                + solde + " $", "Information du Solde", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     break;
+
+
 
                 /******************* OPÉRATIONS BANCAIRES *******************/
                 case "DEPOT" :
