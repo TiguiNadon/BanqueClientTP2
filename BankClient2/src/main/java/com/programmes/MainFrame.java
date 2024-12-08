@@ -43,6 +43,8 @@ public class MainFrame extends JFrame implements Runnable, Observateur {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
+
+
     private void initialiserComposants() {
         //Création et initialisation des composants :
         client = new Client();

@@ -69,6 +69,8 @@ public class PanneauPrincipal  extends JPanel {
         this.numerosComptes.clear();
         this.bureau.removeAll();
     }
+
+
     public void cacherPanneauConnexion() {
         panneauConnexion.effacer();
         panneauConnexion.setVisible(false);

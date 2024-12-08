@@ -117,8 +117,11 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     // Encapsulation dans un JScrollPane (pour gérer le défilement si nécessaire)
                     JScrollPane scrollPane = new JScrollPane(textArea);
 
+                    System.out.println("Historique clique bouton");
+
                     // Affichage dans une boîte de dialogue de type message
-                    JOptionPane.showMessageDialog(null, scrollPane, "Boîte de Dialogue", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, scrollPane, "Historique du Compte", JOptionPane.INFORMATION_MESSAGE);
+                    break; // Ajouter ce break pour éviter de continuer dans le cas "default"
                 /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default:
                     System.out.println("RECU : "+evenement.getType()+" "+evenement.getArgument());

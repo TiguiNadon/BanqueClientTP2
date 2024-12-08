@@ -21,6 +21,8 @@ import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.evenement.EvenementUtil;
 import com.atoudeft.commun.thread.ThreadEcouteurDeTexte;
 import com.atoudeft.observer.Observable;
+import com.atoudeft.vue.PanneauPrincipal;
+import com.programmes.MainFrame;
 
 /**
  * Cette classe représente un client capable de se connecter à un serveur.
@@ -37,7 +39,7 @@ public class Client extends Observable implements Lecteur {
     private Connexion connexion;
     private GestionnaireEvenement gestionnaireEvenement;
     private ThreadEcouteurDeTexte ecouteurTexte;
-
+    private MainFrame mainFrame;
     /**
      * Permet de fournir un autre gestionnaire d'événements en remplacement de celui construit par défaut.
      *
