@@ -6,91 +6,114 @@ import com.atoudeft.controleur.EcouteurListeComptes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Vector;
 
 /**
+ * Main panel for the banking application.
+ * Handles login, account management, and operation panels.
  *
- * @author Abdelmoumène Toudeft (Abdelmoumene.Toudeft@etsmtl.ca)
- * @version 1.0
+ * @author Abdelmoumène Toudeft
+ * @version 1.1
  * @since 2024-11-01
  */
-public class PanneauPrincipal  extends JPanel {
+public class PanneauPrincipal extends JPanel {
     private Client client;
     private PanneauConnexion panneauConnexion;
     private JPanel panneauCompteClient;
-    private PanneauOperationsCompte panneauOperationsCompte;
+    private JPanel panneauOperations;
 
     private DefaultListModel<String> numerosComptes;
     private JList<String> jlNumerosComptes;
-    private JDesktopPane bureau;
-
 
     public PanneauPrincipal(Client client) {
         this.client = client;
 
+        // Initialize the connection panel
         panneauConnexion = new PanneauConnexion();
-        panneauConnexion.setEcouteur(new EcouteurConnexion(client,panneauConnexion));
+        panneauConnexion.setEcouteur(new EcouteurConnexion(client, panneauConnexion));
 
-        panneauOperationsCompte = new PanneauOperationsCompte();
-
-        panneauCompteClient = new JPanel();
-
-        panneauCompteClient.setLayout(new BorderLayout());
+        // Initialize the account client panel
+        panneauCompteClient = new JPanel(new BorderLayout());
         panneauCompteClient.setBackground(Color.WHITE);
-        panneauOperationsCompte.setBackground(Color.WHITE);
 
+        // Initialize the operations panel container with CardLayout
+        panneauOperations = new JPanel(new CardLayout());
+        panneauOperations.setBackground(Color.WHITE);
+
+        // Create account list
         numerosComptes = new DefaultListModel<>();
-
         jlNumerosComptes = new JList<>(numerosComptes);
         jlNumerosComptes.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         jlNumerosComptes.setBorder(BorderFactory.createTitledBorder("Comptes bancaires"));
-        jlNumerosComptes.setPreferredSize(new Dimension(250,500));
-
-
-        panneauCompteClient.add(panneauOperationsCompte, BorderLayout.NORTH);
-        panneauCompteClient.add(jlNumerosComptes, BorderLayout.WEST);
-        //Enregistrement de l'écouteur de souris:
+        jlNumerosComptes.setPreferredSize(new Dimension(250, 500));
         jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client));
 
-        this.setLayout(new BorderLayout());
+        // Add components to the account client panel
+        panneauCompteClient.add(panneauOperations, BorderLayout.CENTER);
+        panneauCompteClient.add(jlNumerosComptes, BorderLayout.WEST);
+        panneauCompteClient.setVisible(false);
 
+        // Set layout and add panels to the main panel
+        this.setLayout(new BorderLayout());
         this.add(panneauConnexion, BorderLayout.NORTH);
         this.add(panneauCompteClient, BorderLayout.CENTER);
-        panneauCompteClient.setVisible(false);
     }
 
     /**
-     * Vide les éléments d'interface du panneauPrincipal.
+     * Clear all displayed elements in the main panel.
      */
     public void vider() {
-        this.numerosComptes.clear();
-        this.bureau.removeAll();
+        numerosComptes.clear();
+        panneauOperations.removeAll();
     }
 
-
+    /**
+     * Hide the login panel.
+     */
     public void cacherPanneauConnexion() {
         panneauConnexion.effacer();
         panneauConnexion.setVisible(false);
     }
+
+    /**
+     * Show the login panel.
+     */
     public void montrerPanneauConnexion() {
         panneauConnexion.setVisible(true);
     }
+
+    /**
+     * Hide the account management panel.
+     */
     public void cacherPanneauCompteClient() {
         panneauCompteClient.setVisible(false);
-        this.numerosComptes.clear();
+        numerosComptes.clear();
     }
+
+    /**
+     * Show the account management panel.
+     */
     public void montrerPanneauCompteClient() {
         panneauCompteClient.setVisible(true);
     }
+
     /**
-     * Affiche un numéro de compte dans le JList des comptes.
+     * Add an account number to the JList of accounts.
      *
-     * @param str chaine contenant le numéros de compte
+     * @param str the account number
      */
     public void ajouterCompte(String str) {
         numerosComptes.addElement(str);
+    }
+
+    /**
+     * Display the operations panel in the account management interface.
+     *
+     * @param panneauOperations the panel containing operations
+     */
+    public void afficherPanneauOperations(JPanel panneauOperations) {
+        this.panneauOperations.removeAll(); // Clear any existing panels
+        this.panneauOperations.add(panneauOperations, BorderLayout.CENTER);
+        this.panneauOperations.revalidate(); // Revalidate the layout
+        this.panneauOperations.repaint(); // Repaint to reflect changes
     }
 }
